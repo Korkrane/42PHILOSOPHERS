@@ -6,13 +6,14 @@
 #    By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/04 15:07:09 by bahaas            #+#    #+#              #
-#    Updated: 2021/06/14 17:32:15 by bahaas           ###   ########.fr        #
+#    Updated: 2021/06/28 17:49:30 by bahaas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 PHILO_NAME	= philo
 
-SRCS 		=	srcs/main.c
+SRCS 		=	srcs/main.c \
+				srcs/init.c
 	
 CC			= clang
 
@@ -32,8 +33,8 @@ all: 		philo
 philo: 	${OBJS}
 			@printf "\n"
 			@make -C libft/ --no-print-directory -s
-			@${CC} ${CFLAGS} ${HEADER} ${OBJS} -o ${PHILO_NAME} -L libft/ -lft
-			@echo "\033[34m[PHILO]\033[0m Building checker program : \033[32mOK\033[0m"
+			@${CC} ${CFLAGS} ${HEADER} ${OBJS} -o ${PHILO_NAME} -L libft/ -lft -pthread
+			@echo "\033[34m[PHILO]\033[0m Building philo program : \033[32mOK\033[0m"
 
 clean:
 			@make clean -C libft/ --no-print-directory
