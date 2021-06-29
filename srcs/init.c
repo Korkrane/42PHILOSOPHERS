@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 17:47:27 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/28 19:31:24 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/29 15:24:48 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@ static int check_parameters(int ac, char **av)
 {
 	int i;
 
-	i = 1;
-	while(i < ac - 1)
+	i = 0;
+	while (++i < ac - 1)
 	{
-		if (ft_isnumb(av[i]) == FALSE)
+		if (ft_isnumb(av[i]) == FALSE || ft_atoi(av[i]) <= 0)
 			return (FALSE);
-		i++;
 	}
 	return (TRUE);
 }
@@ -36,6 +35,7 @@ static int init_forks(t_main *main)
 	i = -1;
 	while (++i < main->n_philo)
 		pthread_mutex_init(&main->forks[i], NULL);
+	main->init_complete = 1;
 	return (TRUE);
 }
 
@@ -43,6 +43,8 @@ static int init_philos(t_main *main)
 {
 	int i;
 
+	if (main->n_philo < 2)
+		return (FALSE);
 	main->philos = malloc(sizeof(t_philo) * main->n_philo);
 	if(!main->philos)
 		return (FALSE);
