@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 15:29:23 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/29 15:31:37 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/29 18:12:35 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ void unlock_forks(t_philo *philo)
 
 void eat(t_philo *philo)
 {
+	philo->last_meal = set_time() - philo->main->init_time;
 	philo->n_eat += 1;
 	update_timers(philo);
-	printf("%lums\tPhilo %d is eating\n", set_time() - philo->main->init_time, philo->id);
+	printf("%lums\tPhilo %d is eating (n_eat:%d)\n", set_time() - philo->main->init_time, philo->id, philo->n_eat);
 	usleep(philo->main->time_to_eat * 1000);
 }
 

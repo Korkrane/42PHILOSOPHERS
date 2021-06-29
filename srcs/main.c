@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 17:19:13 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/29 16:11:57 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/29 18:41:29 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,21 @@ int launch_threads(t_main *main)
 	{
 		philo = (void*)(&main->philos[i]);
 		pthread_create(&main->philos[i].thread, NULL, &routine, philo);
+		//pthread_detach(main->philos[i].thread);
 		usleep(100);
 	}
+	/*	
 	i = -1;
 	while(++i < main->n_philo)
 		pthread_join(main->philos[i].thread, NULL);
+	*/
+	while (1)
+	{
+		//if (death_time_checker(main) != 0)
+		//	break ;
+		if (meal_time_checker(main) != 0)
+			break ;
+	}
 	return (0);
 }
 

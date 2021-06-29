@@ -6,7 +6,7 @@
 #    By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/04 15:07:09 by bahaas            #+#    #+#              #
-#    Updated: 2021/06/29 15:34:53 by bahaas           ###   ########.fr        #
+#    Updated: 2021/06/29 17:28:29 by bahaas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ PHILO_NAME	= philo
 SRCS 		=	srcs/main.c \
 				srcs/init.c \
 				srcs/actions.c \
-				srcs/utils.c
+				srcs/utils.c \
+				srcs/timers.c
 	
 CC			= clang
 

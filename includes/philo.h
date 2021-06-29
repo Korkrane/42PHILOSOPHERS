@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 17:19:38 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/29 15:55:14 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/06/29 17:59:47 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_main
 	int time_to_eat;
 	int time_to_sleep;
 	int n_time_each_must_eat;
+	int	full_must_eat;
 	u_int64_t init_time;
 
 	int init_complete;
@@ -69,4 +70,10 @@ u_int64_t set_time(void);
 void print_philo_ids(t_main *main);
 void update_timers(t_philo *philo);
 
+/*
+** timers.c
+*/
+
+int death_time_checker(t_main *main);
+int meal_time_checker(t_main *main);
 #endif
