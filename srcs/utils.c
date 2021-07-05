@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 15:33:39 by bahaas            #+#    #+#             */
-/*   Updated: 2021/06/29 16:40:56 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/05 21:03:47 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void update_timers(t_philo *philo)
 { 
 	philo->last_meal = set_time();
 	philo->death_time = philo->last_meal + philo->main->time_to_die;
+	//printf("last meal : %lums && death time : %lums\n", set_time() - philo->last_meal, philo->death_time);
 }
 
 void print_philo_ids(t_main *main)
