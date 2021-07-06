@@ -5,36 +5,95 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/29 15:33:39 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/05 21:03:47 by bahaas           ###   ########.fr       */
+/*   Created: 2021/07/06 23:44:27 by bahaas            #+#    #+#             */
+/*   Updated: 2021/07/06 23:44:29 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-u_int64_t set_time(void)
+static int	ft_isspace(int ch)
 {
-	struct timeval time;
-	gettimeofday(&time, NULL);
-	return((time.tv_sec * (u_int64_t)1000) + (time.tv_usec / 1000));
+	if (ch == '\t' || ch == '\n' || ch == '\v'
+		|| ch == '\f' || ch == '\r' || ch == ' ')
+		return (TRUE);
+	else
+		return (FALSE);
 }
 
-void update_timers(t_philo *philo)
-{ 
-	philo->last_meal = set_time();
-	philo->death_time = philo->last_meal + philo->main->time_to_die;
-	//printf("last meal : %lums && death time : %lums\n", set_time() - philo->last_meal, philo->death_time);
+/*
+static int ft_isdigit(int ch)
+{
+  if (ch >= '0' && ch <= '9')
+    return (TRUE);
+  else
+    return (FALSE);
+}
+*/
+
+int ft_is_nbr(const char *str)
+{
+  int i;
+
+  i = 0;
+  if (!str || !*str)
+    return (FALSE);
+  while (str[i])
+  {
+    if (str[i] == '+' || str[i] == '-')
+      i++;
+    else
+      break ;
+  }
+  while (str[i])
+  {
+    if (!ft_isdigit(str[i]))
+      return (FALSE);
+    i++;
+  }
+  return (TRUE);
 }
 
-void print_philo_ids(t_main *main)
+int	ft_atoi(const char *str)
 {
-	int i;
+	long int	result;
+	int			sign;
+	int			i;
 
-	i = -1;
-	printf("\n");
-	while(++i < main->n_philo)
+	result = 0;
+	sign = 1;
+	i = 0;
+	while (ft_isspace((int)str[i]))
+		i++;
+	if (str[i] == '+' || str[i] == '-')
 	{
-		printf("Philo[%d] : left_id = %d, right_id = %d\n", main->philos[i].id, main->philos[i].left_fork_id,  main->philos[i].right_fork_id);
+		if (str[i] == '-')
+			sign = -1;
+		i++;
 	}
-	printf("\n");
+	while (ft_isdigit(str[i]))
+		result = (result * 10) + str[i++] - '0';
+	result = ((int)(sign * result));
+	return (result);
+}
+
+int	is_alive(t_philo *philo)
+{
+	if	(philo->state != DEAD && !philo->main->dead_found)
+		return (1);
+	return (0);
+}
+
+int	is_hungry(t_philo *philo)
+{
+	if	(philo->meal_taken < philo->main->nb_meal)
+		return (1);
+	return (0);
+}
+
+int	has_eat_enough(t_philo *philo)
+{
+	if	(philo->meal_taken == philo->main->nb_meal)
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/04 15:07:09 by bahaas            #+#    #+#              #
-#    Updated: 2021/07/05 21:50:00 by bahaas           ###   ########.fr        #
+#    Updated: 2021/07/06 23:39:49 by bahaas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,14 @@ PHILO_NAME	= philo
 
 SRCS 		=	srcs/main.c \
 				srcs/init.c \
-				srcs/actions.c \
+				srcs/free.c \
+				srcs/monitoring.c \
+				srcs/timer.c \
+				srcs/message.c \
 				srcs/utils.c \
-				srcs/timers.c \
-				srcs/message.c
+				srcs/printer.c \
+				srcs/actions.c \
+				srcs/libft_utils.c
 	
 CC			= clang
 
@@ -37,17 +41,14 @@ all: 		philo
 
 philo: 	${OBJS}
 			@printf "\n"
-			@make -C libft/ --no-print-directory -s
-			@${CC} ${CFLAGS} ${HEADER} ${OBJS} -o ${PHILO_NAME} -L libft/ -lft -pthread
+			@${CC} ${CFLAGS} ${HEADER} ${OBJS} -o ${PHILO_NAME} -pthread
 			@echo "\033[34m[PHILO]\033[0m Building philo program : \033[32mOK\033[0m"
 
 clean:
-			@make clean -C libft/ --no-print-directory
 			@rm -rf ${OBJS}
 			@echo "\033[34m[PHILO]\033[0m Delete .o files : \033[32mOK\033[0m"
 
 fclean:		clean
-			@make fclean -C libft/ --no-print-directory
 			@rm -rf ${PHILO_NAME}
 			@echo "\033[34m[PHILO]\033[0m Delete executable files : \033[32mOK\033[0m"
 

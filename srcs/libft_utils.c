@@ -1,32 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   timers.c                                           :+:      :+:    :+:   */
+/*   libft_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/29 16:21:55 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/05 22:12:52 by bahaas           ###   ########.fr       */
+/*   Created: 2021/07/06 21:45:01 by bahaas            #+#    #+#             */
+/*   Updated: 2021/07/06 21:46:33 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int		death_time_checker(t_main *main)
+int	ft_isdigit(int c)
 {
-	int i;
-	u_int64_t last_meal_time;
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
 
-	i = -1;
-	while (++i < main->n_philo)
+int	ft_isnumb(char *num)
+{
+	int	i;
+
+	i = 0;
+	if (num[i] != '\0')
 	{
-		last_meal_time = set_time() - main->philos[i].last_meal;
-		if (last_meal_time >= main->time_to_die)
+		while (num[i])
 		{
-			printf("%lums last meal lol \n", last_meal_time);
-			printf("%lums last meal of philo %d lol \n", main->philos[i].last_meal, i);
-			return (1);
+			if (num[i] == '+' || num[i] == '-')
+				i++;
+			else
+				break ;
 		}
+		while (num[i])
+		{
+			if (ft_isdigit(num[i]))
+				i++;
+			else
+				return (0);
+		}
+		return (1);
 	}
 	return (0);
 }
