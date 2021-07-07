@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 21:45:01 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/07 15:26:23 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/07 18:46:46 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,19 +97,4 @@ char	*ft_itoa(long n)
 		n /= 10;
 	}
 	return (str);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	int		i;
-
-	i = 0;
-	if (s)
-	{
-		while (s[i])
-		{
-			write(fd, &s[i], 1);
-			i++;
-		}
-	}
 }

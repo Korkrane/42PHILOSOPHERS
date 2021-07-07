@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 23:45:25 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/07 15:32:08 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/07 18:57:11 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define FALSE 0
 # define TRUE 1
 
-typedef enum	e_state
+typedef enum e_state
 {
 	TAKE_FORK,
 	EATING,
@@ -32,22 +32,20 @@ typedef enum	e_state
 	DEAD
 }				t_state;
 
-typedef struct	s_philo
+typedef struct s_philo
 {
 	int				num;
 	int				state;
 	int				meal_taken;
-	//long			birthday;
 	long			start_eat;
-	pthread_mutex_t *left_fork;
-	pthread_mutex_t *right_fork;
-	struct s_main			*main;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
+	struct s_main	*main;
 }				t_philo;
 
-typedef struct	s_main
+typedef struct s_main
 {
 	int				nb_philo;
-	//int				nb_forks;
 	int				t_die;
 	int				t_eat;
 	int				t_sleep;
@@ -56,52 +54,34 @@ typedef struct	s_main
 	int				nb_finished_meal;
 	int				dead_found;
 	long			start_time;
-	t_philo	*philo;
+	t_philo			*philo;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	printer;
-	pthread_mutex_t finished_meal;
+	pthread_mutex_t	finished_meal;
 }				t_main;
 
-int 	ft_is_nbr(const char *str);
-int		ft_atoi(const char *str);
-long	elapsed_time(long starter);
-long  	get_time();
+int		init(t_main *main, int ac, char **av);
+
+void	select_mssg(t_philo *philo);
+
 void	*routine(void *data);
-void	print_philo(long ts, int num, char *msg, t_philo *philo);
-void  ft_usleep(int duration);
+void	launch_cycle(t_philo *philo);
+void	*control_death(void *tmp);
+void	death_monitor(t_main *main);
+void	meal_and_death_monitor(t_main *main);
 
-
-//new
-
-int	free_mutex(t_main *main);
+void	free_all(t_main *main);
+int		free_mutex(t_main *main);
 void	free_forks(t_main *main);
 void	free_philo(t_main *main);
 
-int init_philos(t_main *main);
-int init_forks(t_main *main);
-int init_mutex(t_main *main);
-
-void select_mssg(t_philo *philo);
-int init(t_main *main, int ac, char **av);
-
-void	free_all(t_main *main);
-
-
-int	ft_isdigit(int c);
-int	ft_isnumb(char *num);
-char		*ft_strjoin(char *s1, char *s2);
+int		ft_atoi(const char *str);
+int		ft_isnumb(char *num);
 char	*ft_itoa(long n);
-void	ft_putstr_fd(char *s, int fd);
 
-
-int is_alive(t_philo *philo);
-int is_hungry(t_philo *philo);
-int	has_eat_enough(t_philo *philo);
-
-void	launch_cycle(t_philo *philo);
-
-
-void	*control_death(void *tmp);
-void	meal_and_death_monitor(t_main *main);
-void	death_monitor(t_main *main);
+long	elapsed_time(long starter);
+long	get_time(void);
+int		is_alive(t_philo *philo);
+int		is_hungry(t_philo *philo);
+int		has_eat_enough(t_philo *philo);
 #endif

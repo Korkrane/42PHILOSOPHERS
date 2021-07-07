@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 20:23:58 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/07 15:41:18 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/07 18:44:51 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,21 +80,15 @@ int	init(t_main *main, int ac, char **av)
 		main->t_die = ft_atoi(av[2]);
 		main->t_eat = ft_atoi(av[3]);
 		main->t_sleep = ft_atoi(av[4]);
+		main->nb_meal = 0;
 		if (ac == 6)
-		{
-			main->option_nb_meal = 1;
 			main->nb_meal = ft_atoi(av[5]);
-		}
-		else
-		{
-			main->option_nb_meal = 0;
-			main->nb_meal = 0;
-		}
 		main->nb_finished_meal = 0;
 		main->dead_found = FALSE;
 		main->philo = NULL;
 		main->forks = NULL;
-		if ((init_forks(main) && init_philos(main) && init_mutex(main)) == FALSE)
+		if ((init_forks(main) && init_philos(main) && init_mutex(main))
+			== FALSE)
 			return (FALSE);
 		return (TRUE);
 	}

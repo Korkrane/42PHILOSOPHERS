@@ -6,38 +6,25 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 23:38:23 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/07 15:51:31 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/07 18:53:48 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-/*
-void ending_philo(t_main *main)
-{
-	int i;
-
-	i = -1;
-	while (++i < main->nb_philo)
-		*(&main->philo[i].state) = DEAD;
-}
-*/
-
 void	death_monitor(t_main *main)
 {
 	while (!main->dead_found)
-		;
-//	ending_philo(main);
+		usleep(100);
 }
 
 void	meal_and_death_monitor(t_main *main)
 {
 	while (!main->dead_found
 		&& main->nb_finished_meal < main->nb_philo)
-		;
+		usleep(100);
 	if (main->nb_finished_meal == main->nb_philo && !main->dead_found)
 		printf("\nEach philosopher have eat %d times.\n", main->nb_meal);
-//	ending_philo(main);
 }
 
 static int	is_dead(t_philo *philo)
@@ -62,9 +49,8 @@ void	*control_death(void *tmp)
 	t_philo	*philo;
 
 	philo = (t_philo *)tmp;
-	if (philo->main->option_nb_meal)
+	if (philo->main->nb_meal > 0)
 	{
-		//while (philo->state != DEAD && is_hungry(philo))
 		while (is_alive(philo) && is_hungry(philo))
 			if (is_dead(philo))
 				break ;

@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 23:34:39 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/07 15:10:37 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/07 18:37:25 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	eat(t_philo *philo)
 	philo->start_eat = elapsed_time(philo->main->start_time);
 	select_mssg(philo);
 	usleep(philo->main->t_eat * 1000);
-	if (philo->main->option_nb_meal && has_eat_enough(philo))
+	if (philo->main->nb_meal > 0 && has_eat_enough(philo))
 	{
 		pthread_mutex_lock(&philo->main->finished_meal);
 		philo->main->nb_finished_meal = philo->main->nb_finished_meal + 1;

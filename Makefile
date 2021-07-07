@@ -6,7 +6,7 @@
 #    By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/04 15:07:09 by bahaas            #+#    #+#              #
-#    Updated: 2021/07/07 15:27:49 by bahaas           ###   ########.fr        #
+#    Updated: 2021/07/07 18:46:22 by bahaas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,7 @@ SRCS 		=	srcs/main.c \
 				srcs/utils.c \
 				srcs/message.c \
 				srcs/actions.c \
-				srcs/libft_utils.c \
-				srcs/libft_utils_2.c
+				srcs/libft_utils.c
 	
 CC			= clang
 
