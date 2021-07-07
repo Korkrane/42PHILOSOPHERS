@@ -33,9 +33,9 @@ static int	is_dead(t_philo *philo)
 
 	time = elapsed_time(philo->main->start_time);
 	if ((philo->main->t_die < time - philo->start_eat)
-		&& philo->state != EATING)
+		&& philo->status != EATING)
 	{
-		philo->state = DEAD;
+		philo->status = DEAD;
 		select_mssg(philo);
 		philo->main->dead_found = TRUE;
 		return (1);

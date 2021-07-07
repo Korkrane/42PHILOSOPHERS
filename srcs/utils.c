@@ -34,7 +34,7 @@ long	get_time(void)
 
 int	is_alive(t_philo *philo)
 {
-	if (philo->state != DEAD && !philo->main->dead_found)
+	if (philo->status != DEAD && !philo->main->dead_found)
 		return (1);
 	return (0);
 }

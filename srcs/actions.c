@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 23:34:39 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/07 18:37:25 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/07 19:00:01 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	lock_forks(t_philo *philo)
 {
-	philo->state = TAKE_FORK;
-	if (philo->num % 2)
+	philo->status = TAKE_FORK;
+	if (philo->id % 2)
 	{
 		pthread_mutex_lock(philo->right_fork);
 		select_mssg(philo);
@@ -33,7 +33,7 @@ static void	lock_forks(t_philo *philo)
 
 static void	eat(t_philo *philo)
 {
-	philo->state = EATING;
+	philo->status = EATING;
 	philo->meal_taken++;
 	philo->start_eat = elapsed_time(philo->main->start_time);
 	select_mssg(philo);
@@ -48,7 +48,7 @@ static void	eat(t_philo *philo)
 
 static void	unlock_forks(t_philo *philo)
 {
-	philo->state = SLEEPING;
+	philo->status = SLEEPING;
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
 	select_mssg(philo);
@@ -57,7 +57,7 @@ static void	unlock_forks(t_philo *philo)
 
 static void	think(t_philo *philo)
 {
-	philo->state = THINKING;
+	philo->status = THINKING;
 	select_mssg(philo);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 20:23:58 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/07 18:44:51 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/07 18:59:53 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	init_philos(t_main *main)
 		return (FALSE);
 	while (++i < main->nb_philo)
 	{
-		main->philo[i].num = i + 1;
-		main->philo[i].state = THINKING;
+		main->philo[i].id = i + 1;
+		main->philo[i].status = THINKING;
 		main->philo[i].main = main;
 		main->philo[i].meal_taken = 0;
 		main->philo[i].start_eat = 0;

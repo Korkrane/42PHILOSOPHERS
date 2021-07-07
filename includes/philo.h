@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 23:45:25 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/07 18:57:11 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/07 18:59:17 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@
 # define FALSE 0
 # define TRUE 1
 
-typedef enum e_state
+typedef enum e_status
 {
 	TAKE_FORK,
 	EATING,
 	SLEEPING,
 	THINKING,
 	DEAD
-}				t_state;
+}				t_status;
 
 typedef struct s_philo
 {
-	int				num;
-	int				state;
+	int				id;
+	int				status;
 	int				meal_taken;
 	long			start_eat;
 	pthread_mutex_t	*left_fork;
@@ -50,7 +50,6 @@ typedef struct s_main
 	int				t_eat;
 	int				t_sleep;
 	int				nb_meal;
-	int				option_nb_meal;
 	int				nb_finished_meal;
 	int				dead_found;
 	long			start_time;
