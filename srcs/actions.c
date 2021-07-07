@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 23:34:39 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/06 23:43:26 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/07 15:10:37 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,3 @@ void	launch_cycle(t_philo *philo)
 	think(philo);
 	usleep(100);
 }
-

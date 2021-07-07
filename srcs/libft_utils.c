@@ -6,17 +6,37 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 21:45:01 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/06 21:46:33 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/07 15:26:23 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	ft_isdigit(int c)
+int	ft_atoi(const char *nptr)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	int	sign;
+	int	res;
+	int	i;
+
+	i = 0;
+	res = 0;
+	sign = 1;
+	while (nptr[i] == ' ' || nptr[i] == '\t' || nptr[i] == '\v'
+		|| nptr[i] == '\n' || nptr[i] == '\f'
+		|| nptr[i] == '\r')
+		i++;
+	if (nptr[i] == '+' || nptr[i] == '-')
+	{
+		if (nptr[i] == '-')
+			sign = -sign;
+		i++;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		res = res * 10 + nptr[i] - '0';
+		i++;
+	}
+	return (res * sign);
 }
 
 int	ft_isnumb(char *num)
@@ -35,7 +55,7 @@ int	ft_isnumb(char *num)
 		}
 		while (num[i])
 		{
-			if (ft_isdigit(num[i]))
+			if (num[i] >= '0' && num[i] <= '9')
 				i++;
 			else
 				return (0);
@@ -43,4 +63,53 @@ int	ft_isnumb(char *num)
 		return (1);
 	}
 	return (0);
+}
+
+static int	ft_len_nbr(long n)
+{
+	unsigned int	size;
+
+	size = 1;
+	while (n >= 10)
+	{
+		n = n / 10;
+		size++;
+	}
+	return (size);
+}
+
+char	*ft_itoa(long n)
+{
+	char	*str;
+	int		size;
+	int		i;
+
+	i = 0;
+	size = ft_len_nbr(n);
+	str = (char *)malloc(size + 1);
+	if (!str)
+		return (NULL);
+	str[size] = '\0';
+	while (size > i)
+	{
+		size--;
+		str[size] = (n % 10) + '0';
+		n /= 10;
+	}
+	return (str);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	int		i;
+
+	i = 0;
+	if (s)
+	{
+		while (s[i])
+		{
+			write(fd, &s[i], 1);
+			i++;
+		}
+	}
 }

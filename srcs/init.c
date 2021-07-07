@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 20:23:58 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/06 22:39:39 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/07 15:41:18 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ int	init_philos(t_main *main)
 	int	i;
 
 	i = -1;
-	main->philo = (t_philo *) malloc(sizeof(t_philo) * main->nb_philo);
+	main->philo = malloc(sizeof(t_philo) * main->nb_philo);
 	if (!main->philo)
 		return (FALSE);
 	while (++i < main->nb_philo)
 	{
 		main->philo[i].num = i + 1;
+		main->philo[i].state = THINKING;
 		main->philo[i].main = main;
 		main->philo[i].meal_taken = 0;
 		main->philo[i].start_eat = 0;
@@ -37,7 +38,7 @@ int	init_philos(t_main *main)
 
 int	init_forks(t_main *main)
 {
-	main->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * main->nb_philo);
+	main->forks = malloc(sizeof(pthread_mutex_t) * main->nb_philo);
 	if (!main->forks)
 	{
 		free_philo(main);
@@ -63,9 +64,11 @@ static int	check_parameters(int ac, char **av)
 	int	i;
 
 	i = 0;
-	while (++i < ac - 1)
+	while (++i < ac)
+	{
 		if (ft_isnumb(av[i]) == FALSE || ft_atoi(av[i]) <= 0)
 			return (FALSE);
+	}
 	return (TRUE);
 }
 

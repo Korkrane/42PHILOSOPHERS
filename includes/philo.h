@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 23:45:25 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/06 23:45:27 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/07 15:32:08 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,10 @@ void	free_all(t_main *main);
 
 int	ft_isdigit(int c);
 int	ft_isnumb(char *num);
+char		*ft_strjoin(char *s1, char *s2);
+char	*ft_itoa(long n);
+void	ft_putstr_fd(char *s, int fd);
+
 
 int is_alive(t_philo *philo);
 int is_hungry(t_philo *philo);

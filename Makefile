@@ -6,7 +6,7 @@
 #    By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/04 15:07:09 by bahaas            #+#    #+#              #
-#    Updated: 2021/07/06 23:39:49 by bahaas           ###   ########.fr        #
+#    Updated: 2021/07/07 15:27:49 by bahaas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,18 +16,16 @@ SRCS 		=	srcs/main.c \
 				srcs/init.c \
 				srcs/free.c \
 				srcs/monitoring.c \
-				srcs/timer.c \
-				srcs/message.c \
 				srcs/utils.c \
-				srcs/printer.c \
+				srcs/message.c \
 				srcs/actions.c \
-				srcs/libft_utils.c
+				srcs/libft_utils.c \
+				srcs/libft_utils_2.c
 	
 CC			= clang
 
-#CFLAGS		= -Wextra -Werror -Wall -g
+CFLAGS		= -Wextra -Werror -Wall -g
 #CFLAGS		=  -g -fsanitize=thread
-CFLAGS		=  -g
 
 HEADER		= -I /includes
 
