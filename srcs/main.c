@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 23:44:01 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/12 15:56:16 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/12 17:23:25 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*routine(void *tmp)
 	else
 		while (is_alive(philo))
 			launch_cycle(philo);
-	return ((void *) NULL);
+	return ((void *) 0);
 }
 
 void	launch_threads(t_main *main)

@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 23:34:39 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/12 15:54:12 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/12 17:27:43 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,14 @@ static void	lock_forks(t_philo *philo)
 	{
 		pthread_mutex_lock(philo->right_fork);
 		select_mssg(philo);
-		pthread_mutex_lock(philo->left_fork);
-		select_mssg(philo);
+		if(philo->main->nb_philo == 1)
+			while(philo->status != DEAD)
+				;
+		else
+		{
+			pthread_mutex_lock(philo->left_fork);
+			select_mssg(philo);
+		}
 	}
 	else
 	{
