@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 20:20:03 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/07 18:50:46 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/12 15:43:06 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	free_mutex(t_main *main)
 void	free_all(t_main *main)
 {
 	usleep(1000000);
-	free_philo(main);
 	free_mutex(main);
 	free_forks(main);
+	free_philo(main);
 }

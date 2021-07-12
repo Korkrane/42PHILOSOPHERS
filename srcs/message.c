@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 15:21:31 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/07 18:59:42 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/12 15:59:13 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static void	print_mssg(t_philo *philo, char *status, int i, int j)
 	id = ft_itoa(philo->id);
 	while (time[j])
 		mssg[i++] = time[j++];
-	mssg[i++] = 'm';
-	mssg[i++] = 's';
 	mssg[i++] = '\t';
 	j = 0;
 	while (id[j])
@@ -34,7 +32,10 @@ static void	print_mssg(t_philo *philo, char *status, int i, int j)
 		mssg[i++] = status[j++];
 	mssg[i] = '\0';
 	pthread_mutex_lock(&philo->main->printer);
-	if (!philo->main->dead_found)
+	if ((philo->main->nb_meal > 0
+			&& philo->main->nb_philo != philo->main->nb_finished_meal
+			&& (philo->status != DEAD && philo->main->end != 1))
+		|| !philo->main->dead_found)
 		write(1, mssg, i);
 	pthread_mutex_unlock(&philo->main->printer);
 	free(id);
@@ -43,7 +44,10 @@ static void	print_mssg(t_philo *philo, char *status, int i, int j)
 
 void	select_mssg(t_philo *philo)
 {
-	if (!philo->main->dead_found)
+	if ((philo->main->nb_meal > 0
+			&& philo->main->nb_philo != philo->main->nb_finished_meal
+			&& !philo->main->dead_found)
+		|| (!philo->main->dead_found && philo->main->nb_meal == 0))
 	{
 		if (philo->status == TAKE_FORK)
 			print_mssg(philo, "has taken a fork\n", 0, 0);

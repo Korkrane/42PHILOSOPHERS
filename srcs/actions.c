@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 23:34:39 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/07 19:00:01 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/12 15:54:12 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,11 @@ static void	think(t_philo *philo)
 void	launch_cycle(t_philo *philo)
 {
 	lock_forks(philo);
+	//usleep(100);
 	eat(philo);
+	//usleep(100);
 	unlock_forks(philo);
+	//usleep(100);
 	think(philo);
 	usleep(100);
 }

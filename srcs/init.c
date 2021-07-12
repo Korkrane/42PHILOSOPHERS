@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 20:23:58 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/07 18:59:53 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/12 15:36:49 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	init(t_main *main, int ac, char **av)
 		main->t_eat = ft_atoi(av[3]);
 		main->t_sleep = ft_atoi(av[4]);
 		main->nb_meal = 0;
+		main->end = 0;
 		if (ac == 6)
 			main->nb_meal = ft_atoi(av[5]);
 		main->nb_finished_meal = 0;

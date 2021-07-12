@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 23:44:01 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/07 18:50:31 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/12 15:56:16 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	*routine(void *tmp)
 {
 	t_philo		*philo;
-	pthread_t	death_control;
+	pthread_t	death;
 
 	philo = (t_philo *)tmp;
-	pthread_create(&death_control, NULL, &control_death, philo);
-	pthread_detach(death_control);
+	pthread_create(&death, NULL, &death_watch, philo);
+	pthread_detach(death);
 	if (philo->main->nb_meal > 0)
 		while (is_alive(philo) && is_hungry(philo))
 			launch_cycle(philo);
@@ -40,7 +40,8 @@ void	launch_threads(t_main *main)
 	while (++i < main->nb_philo)
 	{
 		philo = &main->philo[i];
-		pthread_create(&thread, NULL, &routine, (void *)philo);
+		if (pthread_create(&thread, NULL, &routine, (void *)philo) != 0)
+			return (free_all(main));
 		pthread_detach(thread);
 		usleep(100);
 	}

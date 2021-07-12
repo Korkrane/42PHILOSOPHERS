@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 21:45:01 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/07 18:46:46 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/12 14:45:03 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_isnumb(char *num)
 	return (0);
 }
 
-static int	ft_len_nbr(long n)
+static int	ft_nbrsize(long n)
 {
 	unsigned int	size;
 
@@ -85,7 +85,7 @@ char	*ft_itoa(long n)
 	int		i;
 
 	i = 0;
-	size = ft_len_nbr(n);
+	size = ft_nbrsize(n);
 	str = (char *)malloc(size + 1);
 	if (!str)
 		return (NULL);

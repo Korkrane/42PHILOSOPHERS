@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 23:45:25 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/07 18:59:17 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/12 15:56:56 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 
 typedef enum e_status
 {
+	THINKING,
+	DEAD,
 	TAKE_FORK,
 	EATING,
-	SLEEPING,
-	THINKING,
-	DEAD
+	SLEEPING
 }				t_status;
 
 typedef struct s_philo
@@ -57,6 +57,7 @@ typedef struct s_main
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	printer;
 	pthread_mutex_t	finished_meal;
+	int				end;
 }				t_main;
 
 int		init(t_main *main, int ac, char **av);
@@ -65,7 +66,7 @@ void	select_mssg(t_philo *philo);
 
 void	*routine(void *data);
 void	launch_cycle(t_philo *philo);
-void	*control_death(void *tmp);
+void	*death_watch(void *tmp);
 void	death_monitor(t_main *main);
 void	meal_and_death_monitor(t_main *main);
 

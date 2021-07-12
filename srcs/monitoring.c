@@ -6,16 +6,28 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 23:38:23 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/07 18:53:48 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/12 15:57:12 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
+void	kill_them_all(t_main *main)
+{
+	int	i;
+
+	i = -1;
+	while (++i < main->nb_philo)
+		*(&main->philo[i].status) = DEAD;
+	main->end = 1;
+	usleep(100);
+}
+
 void	death_monitor(t_main *main)
 {
 	while (!main->dead_found)
 		usleep(100);
+//	kill_them_all(main);
 }
 
 void	meal_and_death_monitor(t_main *main)
@@ -24,7 +36,8 @@ void	meal_and_death_monitor(t_main *main)
 		&& main->nb_finished_meal < main->nb_philo)
 		usleep(100);
 	if (main->nb_finished_meal == main->nb_philo && !main->dead_found)
-		printf("\nEach philosopher have eat %d times.\n", main->nb_meal);
+		printf("Each philosopher have eat %d times.\n", main->nb_meal);
+//	kill_them_all(main);
 }
 
 static int	is_dead(t_philo *philo)
@@ -44,7 +57,7 @@ static int	is_dead(t_philo *philo)
 	return (0);
 }
 
-void	*control_death(void *tmp)
+void	*death_watch(void *tmp)
 {
 	t_philo	*philo;
 
