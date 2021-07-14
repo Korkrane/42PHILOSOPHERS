@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 23:34:39 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/14 16:42:57 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/14 16:59:01 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static void	eat(t_philo *philo)
 	philo->status = EATING;
 	philo->start_eat = elapsed_time(philo->main->start_time);
 	select_mssg(philo);
+	if (philo->main->nb_philo == 1)
+		return ;
 	ft_usleep(philo->main->t_eat);
 	philo->meal_taken++;
 	if (philo->main->nb_meal > 0 && has_eat_enough(philo))
