@@ -6,38 +6,32 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 23:38:23 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/12 15:57:12 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/14 16:47:31 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	kill_them_all(t_main *main)
-{
-	int	i;
-
-	i = -1;
-	while (++i < main->nb_philo)
-		*(&main->philo[i].status) = DEAD;
-	main->end = 1;
-	usleep(100);
-}
-
 void	death_monitor(t_main *main)
 {
 	while (!main->dead_found)
 		usleep(100);
-//	kill_them_all(main);
 }
 
 void	meal_and_death_monitor(t_main *main)
 {
+	char	*time;
+
 	while (!main->dead_found
 		&& main->nb_finished_meal < main->nb_philo)
 		usleep(100);
 	if (main->nb_finished_meal == main->nb_philo && !main->dead_found)
+	{
+		time = ft_itoa(elapsed_time(main->start_time));
+		printf("%s\t", time);
 		printf("Each philosopher have eat %d times.\n", main->nb_meal);
-//	kill_them_all(main);
+		free(time);
+	}
 }
 
 static int	is_dead(t_philo *philo)
@@ -50,7 +44,9 @@ static int	is_dead(t_philo *philo)
 	{
 		philo->status = DEAD;
 		select_mssg(philo);
+		pthread_mutex_lock(&philo->main->death);
 		philo->main->dead_found = TRUE;
+		pthread_mutex_unlock(&philo->main->death);
 		return (1);
 	}
 	usleep(100);

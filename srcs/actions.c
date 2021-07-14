@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 23:34:39 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/12 17:27:43 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/14 16:42:57 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void	lock_forks(t_philo *philo)
 	{
 		pthread_mutex_lock(philo->right_fork);
 		select_mssg(philo);
-		if(philo->main->nb_philo == 1)
-			while(philo->status != DEAD)
+		if (philo->main->nb_philo == 1)
+			while (philo->status != DEAD)
 				;
 		else
 		{
@@ -40,10 +40,10 @@ static void	lock_forks(t_philo *philo)
 static void	eat(t_philo *philo)
 {
 	philo->status = EATING;
-	philo->meal_taken++;
 	philo->start_eat = elapsed_time(philo->main->start_time);
 	select_mssg(philo);
-	usleep(philo->main->t_eat * 1000);
+	ft_usleep(philo->main->t_eat);
+	philo->meal_taken++;
 	if (philo->main->nb_meal > 0 && has_eat_enough(philo))
 	{
 		pthread_mutex_lock(&philo->main->finished_meal);
@@ -55,10 +55,12 @@ static void	eat(t_philo *philo)
 static void	unlock_forks(t_philo *philo)
 {
 	philo->status = SLEEPING;
-	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
+	if (philo->main->nb_philo == 1)
+		return ;
+	pthread_mutex_unlock(philo->left_fork);
 	select_mssg(philo);
-	usleep(philo->main->t_sleep * 1000);
+	ft_usleep(philo->main->t_sleep);
 }
 
 static void	think(t_philo *philo)
@@ -70,11 +72,8 @@ static void	think(t_philo *philo)
 void	launch_cycle(t_philo *philo)
 {
 	lock_forks(philo);
-	//usleep(100);
 	eat(philo);
-	//usleep(100);
 	unlock_forks(philo);
-	//usleep(100);
 	think(philo);
 	usleep(100);
 }

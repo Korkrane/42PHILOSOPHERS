@@ -6,7 +6,7 @@
 #    By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/04 15:07:09 by bahaas            #+#    #+#              #
-#    Updated: 2021/07/07 18:46:22 by bahaas           ###   ########.fr        #
+#    Updated: 2021/07/14 16:40:30 by bahaas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ SRCS 		=	srcs/main.c \
 CC			= clang
 
 CFLAGS		= -Wextra -Werror -Wall -g
-#CFLAGS		=  -g -fsanitize=thread
 
 HEADER		= -I /includes
 

@@ -6,11 +6,17 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 15:21:31 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/12 15:59:13 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/14 15:53:29 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+static void	free_mssg_data(char *id, char *time)
+{
+	free(id);
+	free(time);
+}
 
 static void	print_mssg(t_philo *philo, char *status, int i, int j)
 {
@@ -18,6 +24,7 @@ static void	print_mssg(t_philo *philo, char *status, int i, int j)
 	char	*id;
 	char	mssg[1000];
 
+	pthread_mutex_lock(&philo->main->printer);
 	time = ft_itoa(elapsed_time(philo->main->start_time));
 	id = ft_itoa(philo->id);
 	while (time[j])
@@ -31,15 +38,13 @@ static void	print_mssg(t_philo *philo, char *status, int i, int j)
 	while (status[j])
 		mssg[i++] = status[j++];
 	mssg[i] = '\0';
-	pthread_mutex_lock(&philo->main->printer);
 	if ((philo->main->nb_meal > 0
 			&& philo->main->nb_philo != philo->main->nb_finished_meal
 			&& (philo->status != DEAD && philo->main->end != 1))
 		|| !philo->main->dead_found)
 		write(1, mssg, i);
 	pthread_mutex_unlock(&philo->main->printer);
-	free(id);
-	free(time);
+	free_mssg_data(id, time);
 }
 
 void	select_mssg(t_philo *philo)

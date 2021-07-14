@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 23:45:25 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/12 17:10:50 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/14 16:48:20 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_main
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	printer;
 	pthread_mutex_t	finished_meal;
+	pthread_mutex_t	death;
 	int				end;
 }				t_main;
 
@@ -71,10 +72,11 @@ void	death_monitor(t_main *main);
 void	meal_and_death_monitor(t_main *main);
 
 void	free_all(t_main *main);
-int		free_mutex(t_main *main);
+void	free_mutex(t_main *main);
 void	free_forks(t_main *main);
 void	free_philo(t_main *main);
 
+void	ft_usleep(int time);
 int		ft_atoi(const char *str);
 int		ft_isnumb(char *num);
 char	*ft_itoa(long n);

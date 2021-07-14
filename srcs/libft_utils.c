@@ -6,11 +6,20 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 21:45:01 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/12 14:45:03 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/14 16:44:32 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+void	ft_usleep(int time)
+{
+	long	start;
+
+	start = get_time();
+	while (get_time() < start + time)
+		usleep(10);
+}
 
 int	ft_atoi(const char *nptr)
 {

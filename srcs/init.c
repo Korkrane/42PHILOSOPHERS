@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 20:23:58 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/12 15:36:49 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/14 16:15:22 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	init_mutex(t_main *main)
 		pthread_mutex_init(&main->forks[i], NULL);
 	pthread_mutex_init(&main->finished_meal, NULL);
 	pthread_mutex_init(&main->printer, NULL);
+	pthread_mutex_init(&main->death, NULL);
 	return (TRUE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bahaas <bahaas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 20:20:03 by bahaas            #+#    #+#             */
-/*   Updated: 2021/07/12 15:43:06 by bahaas           ###   ########.fr       */
+/*   Updated: 2021/07/14 16:48:39 by bahaas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,8 @@ void	free_philo(t_main *main)
 
 void	free_forks(t_main *main)
 {
-	if (main->forks)
-		free(main->forks);
-}
-
-int	free_mutex(t_main *main)
-{
 	int	i;
 
-	pthread_mutex_unlock(&main->printer);
-	pthread_mutex_destroy(&main->printer);
-	pthread_mutex_unlock(&main->finished_meal);
-	pthread_mutex_destroy(&main->finished_meal);
 	i = -1;
 	while (++i < main->nb_philo)
 	{
@@ -41,7 +31,27 @@ int	free_mutex(t_main *main)
 			pthread_mutex_destroy(&main->forks[i]);
 		}
 	}
-	return (FALSE);
+	if (main->forks)
+		free(main->forks);
+}
+
+void	free_mutex(t_main *main)
+{
+	if (pthread_mutex_destroy(&main->printer) == EBUSY)
+	{
+		pthread_mutex_unlock(&main->printer);
+		pthread_mutex_destroy(&main->printer);
+	}
+	if (pthread_mutex_destroy(&main->finished_meal) == EBUSY)
+	{
+		pthread_mutex_unlock(&main->finished_meal);
+		pthread_mutex_destroy(&main->finished_meal);
+	}
+	if (pthread_mutex_destroy(&main->death) == EBUSY)
+	{
+		pthread_mutex_unlock(&main->death);
+		pthread_mutex_destroy(&main->death);
+	}
 }
 
 void	free_all(t_main *main)
